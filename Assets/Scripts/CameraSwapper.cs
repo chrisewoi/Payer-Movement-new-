@@ -75,4 +75,14 @@ public class CameraSwapper : MonoBehaviour
                 break;
         }
     }
+
+    public Camera GetCurrentCamera()
+    {
+        if (currentCameraMode == CameraMode.FirstPeson)
+        {
+            return firstPersonCamera;
+        }
+        return thirdPersonCamera;
+    }
+
 }
