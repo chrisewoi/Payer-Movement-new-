@@ -5,12 +5,10 @@ using UnityEngine;
 public class CameraSwapper : MonoBehaviour
 {
     [SerializeField] private Camera firstPersonCamera, thirdPersonCamera;
-    [SerializeField] private Firstpersoncontroller firstPersonScript;
-    [SerializeField] private ThirdPersonController thirdPersonScript;
 
     public enum CameraMode
     {
-        FirstPeson,
+        FirstPerson,
         ThirdPerson
     }
 
@@ -19,9 +17,6 @@ public class CameraSwapper : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        firstPersonScript = GetComponent<Firstpersoncontroller>();
-        thirdPersonScript = GetComponent<ThirdPersonController>();
-
         firstPersonCamera = FindAnyObjectByType<FirstPersonCamera>().GetComponent<Camera>();
         thirdPersonCamera = FindAnyObjectByType<ThirdPersonCamera>().GetComponentInChildren<Camera>();
 
@@ -41,13 +36,13 @@ public class CameraSwapper : MonoBehaviour
 
     private void ToggleCamera()
     {
-        if(currentCameraMode == CameraMode.FirstPeson)
+        if(currentCameraMode == CameraMode.FirstPerson)
         {
             currentCameraMode = CameraMode.ThirdPerson;
         }
         else
         {
-            currentCameraMode = CameraMode.FirstPeson;
+            currentCameraMode = CameraMode.FirstPerson;
         }
         SetCamera();
     } 
@@ -57,20 +52,16 @@ public class CameraSwapper : MonoBehaviour
         switch (currentCameraMode)
         {
             //if currentCameraMode.FirstPerson
-            case CameraMode.FirstPeson:
+            case CameraMode.FirstPerson:
                 firstPersonCamera.depth = 0;
-                firstPersonScript.enabled = true;
                 thirdPersonCamera.depth = -1;
-                thirdPersonScript.enabled = false;
 
                 break;
             
             //if currentCameraMode is CameraMode.ThirdPerson
             case CameraMode.ThirdPerson:
                 thirdPersonCamera.depth = 0;
-                thirdPersonScript.enabled = true;
                 firstPersonCamera.depth = -1;
-                firstPersonScript.enabled = false;
 
                 break;
         }
@@ -78,11 +69,16 @@ public class CameraSwapper : MonoBehaviour
 
     public Camera GetCurrentCamera()
     {
-        if (currentCameraMode == CameraMode.FirstPeson)
+        if (currentCameraMode == CameraMode.FirstPerson)
         {
             return firstPersonCamera;
         }
         return thirdPersonCamera;
+    }
+
+    public CameraMode GetCameraMode()
+    {
+        return currentCameraMode;
     }
 
 }
