@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class CustomController : MonoBehaviour
+public class CustomController : CombatAgent
 {
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
@@ -86,9 +86,7 @@ public class CustomController : MonoBehaviour
 
         movementThisFrame.y = verticalSpeed;
 
-        Move(movementThisFrame);
-
-        
+        Move(movementThisFrame);        
     }
 
     protected virtual void Move(Vector3 direction)
@@ -184,4 +182,9 @@ public class CustomController : MonoBehaviour
         else return false;
     }
 
+    protected override void EndOfLife()
+    {
+        // Put game over behaviour in here
+        Debug.Log("Player has died");
+    }
 }
