@@ -43,8 +43,8 @@ public class ThirdPersonCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.currentState != GameState.Play)
-            return;
+        if (GameManager.currentState != GameState.Play) return;
+
         //rotate left to right based on mouse movement
         currentHorizontalRotation += Input.GetAxis("Mouse X") * sensitivity;
         //rotate up and down based on mouse movement

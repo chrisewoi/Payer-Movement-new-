@@ -26,6 +26,7 @@ public class FirstPersonCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.currentState != GameState.Play) return;
 
         currentHorizontalRotation += Input.GetAxis("Mouse X") * sensitivity;
         currentVerticalRotation -= Input.GetAxis("Mouse Y") * sensitivity;
